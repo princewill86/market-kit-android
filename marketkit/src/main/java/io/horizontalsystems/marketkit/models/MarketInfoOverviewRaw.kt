@@ -48,10 +48,11 @@ data class MarketInfoOverviewRaw(
                 categories,
                 description ?: "",
                 links,
-                marketData.ath,
-                marketData.athDate,
-                marketData.atl,
-                marketData.atlDate,
+                marketData.ath?.get(currencyManager.baseCurrency.code.lowercase()),
+                marketData.athDate?.get(currencyManager.baseCurrency.code.lowercase()),
+                marketData.atl?.get(currencyManager.baseCurrency.code.lowercase()),
+                marketData.atlDate?.get(currencyManager.baseCurrency.code.lowercase())
+
             )
         }
 
@@ -69,13 +70,9 @@ data class MarketInfoOverviewRaw(
         @SerializedName("fully_diluted_valuation")
         val dilutedMarketCap: BigDecimal?,
         val tvl: BigDecimal?,
-        @SerializedName("ath")
-        val ath: BigDecimal?,
-        @SerializedName("ath_date")
-        val athDate: Date?,
-        @SerializedName("atl")
-        val atl: BigDecimal?,
-        @SerializedName("atl_date")
-        val atlDate: Date?
+        @SerializedName("ath") val ath: Map<String, BigDecimal?>?,
+        @SerializedName("ath_date") val athDate: Map<String, Date?>?,
+        @SerializedName("atl") val atl: Map<String, BigDecimal?>?,
+        @SerializedName("atl_date") val atlDate: Map<String, Date?>?
     )
 }
