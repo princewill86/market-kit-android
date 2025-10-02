@@ -20,7 +20,7 @@ data class MarketInfoOverview(
     val ath: BigDecimal?,
     val athDate: Date?,
     val atl: BigDecimal?,
-    val atlDate: Date?,
+    val atlDate: Date?
 ) {
     companion object {
         fun hsTimePeriodToStr(p: HsTimePeriod) = when (p) {
