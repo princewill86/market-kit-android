@@ -55,7 +55,6 @@ import retrofit2.http.Query
 import retrofit2.http.QueryMap
 import java.math.BigDecimal
 
-
 class HsProvider(baseUrl: String, apiKey: String) {
 
     private val service by lazy {
@@ -551,13 +550,19 @@ class HsProvider(baseUrl: String, apiKey: String) {
             @Query("roi_uids") roiUids: String?,
             @Query("roi_periods") roiPeriods: String?,
             @Query("fields") fields: String = marketInfoFields,
-            @Query("market_data") marketData: Boolean = true // Added to ensure ath, atl are included
+            @Query("market_data") marketData: Boolean = true
         ): Single<MarketInfoOverviewRaw>
 
         @GET("defi-protocols")
         fun getDefiMarketInfos(
             @Query("currency") currencyCode: String
         ): Single<List<DefiMarketInfoResponse>>
+
+        @GET("coins/{coinUid}/details")
+        fun getMarketInfoDetails(
+            @Path("coinUid") coinUid: String,
+            @Query("currency") currencyCode: String
+        ): Single<MarketInfoDetailsResponse>
 
         @GET("analytics/{coinUid}/preview")
         fun getAnalyticsPreview(
@@ -813,7 +818,6 @@ class HsProvider(baseUrl: String, apiKey: String) {
             private const val advancedMarketFields =
                 "all_platforms,price,market_cap,total_volume,price_change_1d,price_change_24h,price_change_7d,price_change_14d,price_change_30d,price_change_200d,price_change_1y,ath_percentage,atl_percentage,ath,ath_date,atl,atl_date"
         }
-    }
 }
 
 data class HistoricalCoinPriceResponse(
