@@ -13,6 +13,7 @@ data class MarketInfoOverviewRaw(
     val links: Map<String, String>,
     @SerializedName("market_data")
     val marketData: MarketData,
+    
 ) {
 
     fun marketInfoOverview(fullCoin: FullCoin): MarketInfoOverview {
@@ -47,6 +48,11 @@ data class MarketInfoOverviewRaw(
                 categories,
                 description ?: "",
                 links,
+                // 🔥 Add these
+                marketData.ath,
+                marketData.athDate,
+                marketData.atl,
+                marketData.atlDate,
             )
         }
 
@@ -64,5 +70,13 @@ data class MarketInfoOverviewRaw(
         @SerializedName("fully_diluted_valuation")
         val dilutedMarketCap: BigDecimal?,
         val tvl: BigDecimal?,
+        
+    // 🔥 New fields
+    val ath: BigDecimal?,
+    @SerializedName("ath_date")
+    val athDate: Date?,
+    val atl: BigDecimal?,
+    @SerializedName("atl_date")
+    val atlDate: Date?,
     )
 }
