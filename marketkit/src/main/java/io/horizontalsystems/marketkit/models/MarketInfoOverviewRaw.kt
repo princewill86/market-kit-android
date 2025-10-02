@@ -48,7 +48,6 @@ data class MarketInfoOverviewRaw(
                 categories,
                 description ?: "",
                 links,
-                // 🔥 Add these
                 marketData.ath,
                 marketData.athDate,
                 marketData.atl,
@@ -70,13 +69,13 @@ data class MarketInfoOverviewRaw(
         @SerializedName("fully_diluted_valuation")
         val dilutedMarketCap: BigDecimal?,
         val tvl: BigDecimal?,
-        
-    // 🔥 New fields
-    val ath: BigDecimal?,
-    @SerializedName("ath_date")
-    val athDate: Date?,
-    val atl: BigDecimal?,
-    @SerializedName("atl_date")
-    val atlDate: Date?,
+        @SerializedName("ath")
+        val ath: BigDecimal?,
+        @SerializedName("ath_date")
+        val athDate: Date?,
+        @SerializedName("atl")
+        val atl: BigDecimal?,
+        @SerializedName("atl_date")
+        val atlDate: Date?
     )
 }
