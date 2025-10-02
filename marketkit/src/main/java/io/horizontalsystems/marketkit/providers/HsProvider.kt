@@ -187,8 +187,11 @@ class HsProvider(baseUrl: String, apiKey: String) {
             coinUid = coinUid,
             currencyCode = currencyCode,
             language = language,
-            roiUids = roiUids.ifEmpty { null }?.joinToString(","),
-            roiPeriods = roiPeriods.ifEmpty { null }?.map { MarketInfoOverview.hsTimePeriodToStr(it) }?.joinToString(",")
+            roiUids = roiUids.ifEmpty { null }
+                ?.joinToString(","),
+            roiPeriods = roiPeriods.ifEmpty { null }
+                ?.map { MarketInfoOverview.hsTimePeriodToStr(it) }
+                ?.joinToString(",")
         )
     }
 
@@ -221,6 +224,7 @@ class HsProvider(baseUrl: String, apiKey: String) {
         currencyCode: String,
         timePeriod: HsTimePeriod
     ): Single<List<ChartPoint>> {
+
         return service.getMarketInfoGlobalTvl(
             currencyCode,
             timePeriod.value,
@@ -549,8 +553,6 @@ class HsProvider(baseUrl: String, apiKey: String) {
             @Query("language") language: String,
             @Query("roi_uids") roiUids: String?,
             @Query("roi_periods") roiPeriods: String?,
-            @Query("fields") fields: String = marketInfoFields,
-            @Query("market_data") marketData: Boolean = true
         ): Single<MarketInfoOverviewRaw>
 
         @GET("defi-protocols")
@@ -694,13 +696,13 @@ class HsProvider(baseUrl: String, apiKey: String) {
             @Query("currency") currencyCode: String,
         ): Single<List<MarketInfoRaw>>
 
-        @GET("markets-overview")
+        @GET("markets/overview")
         fun getMarketOverview(
             @Query("currency") currencyCode: String,
             @Query("simplified") simplified: Boolean = true
         ): Single<MarketOverviewResponse>
 
-        @GET("markets-overview-simple")
+        @GET("markets/overview-simple")
         fun getMarketGlobal(
             @Query("currency") currencyCode: String
         ): Single<MarketGlobal>
@@ -809,15 +811,16 @@ class HsProvider(baseUrl: String, apiKey: String) {
             @Query("currency") currencyCode: String,
         ): Single<List<Stock>>
 
-        companion object {
-            private const val marketInfoFields =
-                "name,code,price,price_change_1d,price_change_24h,price_change_7d,price_change_30d,price_change_90d,market_cap_rank,coingecko_id,market_cap,market_cap_rank,total_volume,ath,ath_date,atl,atl_date"
-            private const val topCoinsMarketInfoFields =
-                "price,price_change_1d,price_change_24h,price_change_7d,price_change_30d,price_change_90d,market_cap_rank,market_cap,total_volume,ath,ath_date,atl,atl_date"
-            private const val coinPriceFields = "price,price_change_1d,price_change_24h,last_updated"
-            private const val advancedMarketFields =
-                "all_platforms,price,market_cap,total_volume,price_change_1d,price_change_24h,price_change_7d,price_change_14d,price_change_30d,price_change_200d,price_change_1y,ath_percentage,atl_percentage,ath,ath_date,atl,atl_date"
-        }
+       companion object {
+    private const val marketInfoFields =
+        "name,code,price,price_change_1d,price_change_24h,price_change_7d,price_change_30d,price_change_90d,market_cap_rank,coingecko_id,market_cap,market_cap_rank,total_volume,ath,ath_date,atl,atl_date"
+    private const val topCoinsMarketInfoFields =
+        "price,price_change_1d,price_change_24h,price_change_7d,price_change_30d,price_change_90d,market_cap_rank,market_cap,total_volume,ath,ath_date,atl,atl_date"
+    private const val coinPriceFields = "price,price_change_1d,price_change_24h,last_updated"
+    private const val advancedMarketFields =
+        "all_platforms,price,market_cap,total_volume,price_change_1d,price_change_24h,price_change_7d,price_change_14d,price_change_30d,price_change_200d,price_change_1y,ath_percentage,atl_percentage,ath,ath_date,atl,atl_date"
+}
+    }
 }
 
 data class HistoricalCoinPriceResponse(
