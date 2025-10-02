@@ -17,10 +17,10 @@ data class MarketInfoOverview(
     val categories: List<CoinCategory>,
     val description: String,
     val links: Map<LinkType, String>,
-    val ath: BigDecimal?,
-    val athDate: Date?,
-    val atl: BigDecimal?,
-    val atlDate: Date?
+    val ath: Map<String, BigDecimal>?,  // Add ATH
+    val athDate: Map<String, String>?,  // Add ATH date
+    val atl: Map<String, BigDecimal>?,  // Add ATL
+    val atlDate: Map<String, String>?   // Add ATL date
 ) {
     companion object {
         fun hsTimePeriodToStr(p: HsTimePeriod) = when (p) {
