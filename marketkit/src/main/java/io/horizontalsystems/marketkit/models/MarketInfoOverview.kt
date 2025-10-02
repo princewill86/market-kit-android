@@ -17,7 +17,6 @@ data class MarketInfoOverview(
     val categories: List<CoinCategory>,
     val description: String,
     val links: Map<LinkType, String>,
-    // 🔹 Add these new ones:
     val ath: BigDecimal?,
     val athDate: Date?,
     val atl: BigDecimal?,
